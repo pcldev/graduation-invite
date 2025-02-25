@@ -40,7 +40,9 @@ const Card: React.FC<CardProps> = ({ person }) => {
       return;
     }
 
-    toast.success("Thank you for coming");
+    toast.success(
+      going ? "Thank you for coming" : "Sorry to hear that you can't come"
+    );
     setFriendName("");
 
     // Prepare data as URL-encoded parameters
@@ -113,7 +115,13 @@ const Card: React.FC<CardProps> = ({ person }) => {
             onChange={(e) => setFriendName(e.target.value)}
             className="invite-input"
           />
-          <div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <button
               onClick={() => handleSubmit(true)}
               style={{

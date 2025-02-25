@@ -110,6 +110,34 @@ img {
   border: 1px solid #ccc;
 }
 
+/* custom-toast.css */
+
+/* Override the main toast style */
+.Toastify__toast {
+  background-color: #333333 !important;
+  color: #000000 !important;
+  border-radius: 10px !important;
+  font-family: "Opsi", sans-serif;
+  font-size: 16px;
+  padding: 16px;
+}
+
+/* Success toast style */
+.Toastify__toast--success {
+  background-color: #ffc0cb !important;
+}
+
+/* Error toast style */
+.Toastify__toast--error {
+  color: #ffffff !important;
+  background-color: #f44336 !important;
+}
+
+/* You can also override the progress bar if needed */
+.Toastify__progress-bar {
+  background: #000000 !important;
+}
+
 /* Responsive adjustments for screens with max-width of 600px */
 @media (max-width: 600px) {
   .bg {
