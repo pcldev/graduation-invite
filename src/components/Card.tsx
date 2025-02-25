@@ -73,7 +73,7 @@ const Card: React.FC<CardProps> = ({ person }) => {
       glareEnable={true}
       glareMaxOpacity={0.45}
       glareBorderRadius="10px"
-      scale={1.15}
+      scale={1.1}
       transitionSpeed={2500}
       style={{
         width: "100%",
