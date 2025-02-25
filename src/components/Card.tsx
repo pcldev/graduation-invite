@@ -21,7 +21,7 @@ const THEMES = {
     color: "#000000",
     buttonBackground: "#ff99aa",
     buttonColor: "#000000",
-    displayName: "Lan Anh",
+    displayName: "Cobemongmo",
     avatar:
       "https://cdn.shopify.com/s/files/1/0698/9814/1941/files/z6352226042331_b389d52cc81d292ee434f5892fbfbce9.jpg?v=1740494884",
   },
