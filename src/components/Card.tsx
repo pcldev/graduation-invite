@@ -2,37 +2,47 @@ import React, { useState } from "react";
 import Tilt from "react-parallax-tilt";
 import { toast } from "react-toastify";
 
+// Define person type
+type PersonType = "conglong" | "lananh";
+
+// Theme configuration
+const THEMES = {
+  conglong: {
+    backgroundColor: "#333333",
+    color: "#ffffff",
+    buttonBackground: "#555555",
+    buttonColor: "#ffffff",
+    displayName: "Công Long",
+    avatar:
+      "https://cdn.shopify.com/s/files/1/0698/9814/1941/files/z6352225942827_1377c10277fb9e5a26c9224b6c167e31.jpg?v=1740494884",
+  },
+  lananh: {
+    backgroundColor: "#ffc0cb",
+    color: "#000000",
+    buttonBackground: "#ff99aa",
+    buttonColor: "#000000",
+    displayName: "Lan Anh",
+    avatar:
+      "https://cdn.shopify.com/s/files/1/0698/9814/1941/files/z6352226042331_b389d52cc81d292ee434f5892fbfbce9.jpg?v=1740494884",
+  },
+};
+
+// Graduation details
+const GRADUATION_INFO = {
+  time: "11:00 PM, 01/03/2025 (UTC+7)",
+  location: "Trung tâm hội nghị Quốc gia - Cổng số 1 Đại lộ Thăng Long",
+  locationUrl: "https://maps.app.goo.gl/qrzFBJBmPopzjzCF6",
+  formSubmitUrl:
+    "https://script.google.com/macros/s/AKfycbzA5OUcOhD0iIhxtZHLF-AGYgMrnNnot7ZWcE_TVx5lokRJ4hMc0hbr4Cg1i069R6kE_w/exec",
+};
+
 interface CardProps {
-  person: "conglong" | "lananh";
+  person: PersonType;
 }
 
 const Card: React.FC<CardProps> = ({ person }) => {
   const [friendName, setFriendName] = useState("");
-
-  // Define theme colors based on person.
-  const theme =
-    person === "conglong"
-      ? {
-          backgroundColor: "#333333",
-          color: "#ffffff",
-          buttonBackground: "#555555",
-          buttonColor: "#ffffff",
-        }
-      : {
-          backgroundColor: "#ffc0cb",
-          color: "#000000",
-          buttonBackground: "#ff99aa",
-          buttonColor: "#000000",
-        };
-
-  // Graduation details
-  const graduationTime = "11:00 PM, 01/03/2025 (UTC+7)";
-  const graduationLocation =
-    "Trung tâm hội nghị Quốc gia - Cổng số 1 Đại lộ Thăng Long";
-  const avatar =
-    person === "conglong"
-      ? "https://cdn.shopify.com/s/files/1/0698/9814/1941/files/z6352225942827_1377c10277fb9e5a26c9224b6c167e31.jpg?v=1740494884"
-      : "https://cdn.shopify.com/s/files/1/0698/9814/1941/files/z6352226042331_b389d52cc81d292ee434f5892fbfbce9.jpg?v=1740494884";
+  const theme = THEMES[person];
 
   const handleSubmit = async (going: boolean) => {
     if (!friendName.trim()) {
@@ -49,19 +59,17 @@ const Card: React.FC<CardProps> = ({ person }) => {
     const formData = new URLSearchParams();
     formData.append("Name", friendName);
     formData.append("Yes/No", going ? "Yes" : "No");
+    formData.append("Form", theme.displayName);
 
     try {
-      await fetch(
-        "https://script.google.com/macros/s/AKfycbzdwZfISWi_bspW7SG9PY8KUcWQOgG7yJzAZY-7NX_YBbQRzq--Paa-KbCChkr5_K_qiA/exec",
-        {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: formData,
-        }
-      );
+      await fetch(GRADUATION_INFO.formSubmitUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: formData,
+      });
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("An error occurred, please try again later");
@@ -90,31 +98,36 @@ const Card: React.FC<CardProps> = ({ person }) => {
         }}
       >
         <h3 className="invite-title">Invite you to attend</h3>
-        <h2 className="invite-subtitle">
-          {person === "conglong" ? "Công Long" : "Lan Anh"}'s
-        </h2>
+        <h2 className="invite-subtitle">{theme.displayName}'s</h2>
         <h3 className="invite-ceremony">Graduation Ceremony</h3>
-        <img src={avatar} alt="Avatar" />
-        <p style={{ margin: "5px 0" }}>Time: {graduationTime}</p>
+        <img src={theme.avatar} alt={`${theme.displayName}'s avatar`} />
+        <p style={{ margin: "5px 0" }}>Time: {GRADUATION_INFO.time}</p>
         <span style={{ margin: "5px 0" }}>Venue:</span>{" "}
         <a
-          href="https://maps.app.goo.gl/qrzFBJBmPopzjzCF6"
+          href={GRADUATION_INFO.locationUrl}
           style={{
             margin: "5px 0",
             textDecoration: "underline",
             color: theme.color,
           }}
         >
-          {graduationLocation}
+          {GRADUATION_INFO.location}
         </a>
         <div style={{ marginTop: "20px" }}>
-          <input
-            type="text"
-            placeholder="Enter your name"
-            value={friendName}
-            onChange={(e) => setFriendName(e.target.value)}
-            className="invite-input"
-          />
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit(true);
+            }}
+          >
+            <input
+              type="text"
+              placeholder="Enter your name"
+              value={friendName}
+              onChange={(e) => setFriendName(e.target.value)}
+              className="invite-input"
+            />
+          </form>
           <div
             style={{
               display: "flex",
