@@ -59,14 +59,14 @@ h2 {
 .girl-background {
   background: linear-gradient(45deg, #ff9a9e, #ffc0cb, #fbc2eb, #fecfef);
   background-size: 200% 200%;
-  animation: gradientAnimation 8s ease infinite;
+  animation: gradientAnimation 4s ease infinite;
 }
 
 /* Boy Theme: Additional color stops for a deeper, dynamic gradient */
 .boy-background {
   background: linear-gradient(45deg, #12100e, #1c1f26, #2b4162, #3c4e6d);
   background-size: 200% 200%;
-  animation: gradientAnimation 8s ease infinite;
+  animation: gradientAnimation 4s ease infinite;
 }
 
 .invite-title {
