@@ -29,7 +29,7 @@ const THEMES = {
 
 // Graduation details
 const GRADUATION_INFO = {
-  time: "11:00 PM, 01/03/2025 (UTC+7)",
+  time: "10:30 AM, 01/03/2025",
   location: "Trung tâm hội nghị Quốc gia - Cổng số 1 Đại lộ Thăng Long",
   locationUrl: "https://maps.app.goo.gl/qrzFBJBmPopzjzCF6",
   formSubmitUrl:
